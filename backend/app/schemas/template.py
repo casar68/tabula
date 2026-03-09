@@ -31,6 +31,8 @@ class TemplateResponse(BaseModel):
     selections: list[SelectionSpec]
     selection_count: int
     page_count: int
+    is_shared: bool = False
+    owner_username: str | None = None
     created_at: datetime
     updated_at: datetime
 

@@ -26,13 +26,13 @@ export function AboutPage() {
           </p>
           <p>
             Basé sur le projet open source Tabula, cette version a été
-            entièrement réécrite avec Python (FastAPI + pdfplumber) et
+            entièrement réécrite avec Python (FastAPI + PyMuPDF) et
             React (TypeScript + Vite).
           </p>
           <div className="pt-2">
             <h4 className="font-medium text-foreground mb-1">Stack technique</h4>
             <ul className="list-disc pl-5 space-y-0.5">
-              <li>Backend : FastAPI + SQLAlchemy + pdfplumber</li>
+              <li>Backend : FastAPI + SQLAlchemy + PyMuPDF</li>
               <li>Frontend : React 19 + TypeScript + Tailwind CSS</li>
               <li>Rendu PDF : react-pdf (pdf.js côté navigateur)</li>
               <li>Base de données : PostgreSQL</li>

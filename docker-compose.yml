@@ -1,14 +1,43 @@
-version: '3.3'
 services:
-  web: &web
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tabula
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
     build:
       context: .
-    command: "jruby -G -r jbundler -S rackup -p 9292 -o 0.0.0.0 config.ru"
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
+      dockerfile: Dockerfile
     ports:
-      - 9292:9292
+      - "8000:8000"
+    environment:
+      DATA_DIR: /app/data
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - appdata:/app/data
+      - uploads:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/settings"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
 
 volumes:
-  bundle:
+  pgdata:
+  appdata:
+  uploads:

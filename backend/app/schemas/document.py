@@ -25,6 +25,7 @@ class DocumentResponse(BaseModel):
 
 class DocumentListResponse(BaseModel):
     documents: list[DocumentResponse]
+    total: int = 0
 
 
 class UploadResponse(BaseModel):

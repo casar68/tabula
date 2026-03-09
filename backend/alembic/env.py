@@ -3,17 +3,17 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
-
-from app.config import settings
+from app.config import get_app_config
 from app.database import Base
 
 # Import all models so they are registered on Base.metadata
-from app.models import Document, Job, Template  # noqa: F401
+from app.models import Document, Job, Template, User  # noqa: F401
 
 config = context.config
 
-# Override sqlalchemy.url from our settings
-config.set_main_option("sqlalchemy.url", settings.database_url)
+# Override sqlalchemy.url from our persistent app config
+app_config = get_app_config()
+config.set_main_option("sqlalchemy.url", app_config.database_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

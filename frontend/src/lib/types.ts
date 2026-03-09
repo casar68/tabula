@@ -66,6 +66,37 @@ export interface TemplateMeta {
   selections: Selection[];
   selection_count: number;
   page_count: number;
+  is_shared?: boolean;
+  owner_username?: string | null;
   created_at: string;
   updated_at: string;
+}
+
+// Auth & settings types
+
+export interface AppSettings {
+  app_version: string;
+  app_name: string;
+  setup_completed: boolean;
+  mode: "mono" | "multi";
+  allow_registration: boolean;
+}
+
+export interface AuthUser {
+  id: string;
+  username: string;
+  is_admin: boolean;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface TokenPair {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+}
+
+export interface SetupStatus {
+  setup_completed: boolean;
+  mode: string | null;
 }

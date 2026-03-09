@@ -1,34 +1,40 @@
-static/pdfs
-local_settings.rb
-tabula.war
-.sass-cache
+# Environment
+.env
+.env.local
+.env.*.local
 
-lib/jars/javacv*
-.ruby-gemset
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.venv/
+venv/
+dist/
+*.whl
 
-TEST_PDFS
-.DS_Store
-build/Tabula.app
-build/tabula.jar
-build/tabula-*.zip
-build/mac
-build/windows
-build/tabula
-launch4j/
+# Node
+node_modules/
+frontend/dist/
 
-# Based on https://github.com/github/gitignore/blob/master/Ruby.gitignore
-*.gem
-*.rbc
+# IDE
+.vscode/
+.idea/
 *.swp
-.bundle
-.config
+*.swo
+*~
+
+# OS
+.DS_Store
 .DS_store
-coverage
-InstalledFiles
-lib/bundler/man
-pkg
-rdoc
-spec/reports
-test/tmp
-test/version_tmp
-tmp
+Thumbs.db
+
+# Project
+backend/uploads/
+static/
+
+# Test / Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/

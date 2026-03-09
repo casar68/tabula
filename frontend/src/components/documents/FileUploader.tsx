@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Upload, FileWarning } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUploadDocuments } from "@/hooks/useDocuments";
@@ -17,12 +17,14 @@ export function FileUploader() {
 
   const { data: jobStatus } = useJobProgress(jobId);
 
-  // Navigate when job completes
-  if (jobStatus?.status === "completed" && uploadedDocId) {
-    setJobId(null);
-    setUploadedDocId(null);
-    navigate(`/pdf/${uploadedDocId}`);
-  }
+  // Navigate when job completes (must be in useEffect, not during render)
+  useEffect(() => {
+    if (jobStatus?.status === "completed" && uploadedDocId) {
+      setJobId(null);
+      setUploadedDocId(null);
+      navigate(`/pdf/${uploadedDocId}`);
+    }
+  }, [jobStatus?.status, uploadedDocId, navigate]);
 
   const handleFiles = useCallback(
     async (files: FileList | File[]) => {
@@ -51,7 +53,7 @@ export function FileUploader() {
         );
       }
     },
-    [upload, navigate]
+    [upload]
   );
 
   const handleDrop = useCallback(
